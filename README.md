@@ -1,24 +1,59 @@
-# README
+# <Night Connect>
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+<一人の時間をみんなと。空いた時間を誰かと過ごせる、そんな空間を作ることを目標にしています。>
 
-Things you may want to cover:
+### サイトテーマ
+<人とつながるSNS>
 
-* Ruby version
+### テーマを選んだ理由
+<私は人と話すのが好きなので、「知らない誰かと気軽につながれる」、そんなSNSがあればなという思いで作りました。>
 
-* System dependencies
+### ターゲットユーザ
+<20代～40代>
 
-* Configuration
+### 主な利用シーン
+<宅飲みの時に一緒に飲んでくれる誰かを探す時など>
 
-* Database creation
+## 設計書
+<...>
 
-* Database initialization
+## チャレンジ要素一覧
+<https://docs.google.com/spreadsheets/d/1mjWL3Pwtai8QlHPyqduW_s1B0MqCaWp4_G6-zoFPSzw/edit?usp=sharing>
 
-* How to run the test suite
+## 開発環境
+- OS：Windows10
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
 
-* Services (job queues, cache servers, search engines, etc.)
+## 使用素材
+使用の際は都度追記していきます。
 
-* Deployment instructions
+##機能一覧
+<admin>
+・ユーザーの一覧を見る
+・ユーザーが利用する趣味のジャンルを作成できる
+・ユーザーのステータスを｛利用中、利用停止｝に変更する
+・ユーザーにメールを送れる
+・ユーザーから送られてきたメールを閲覧する
+・メールのステータスを｛未読、対応中、完了｝に変更する
 
-* ...
+<user>
+・メールアドレスとパスワードと名前で会員登録
+・マイページからディスコードIDと自己紹介文と趣味のジャンルを登録できる
+・ジャンルソートや名前や自己紹介文の一部でユーザーを探せる
+・相手のユーザーページが見れる
+・ユーザー間でフォローし合える
+・相互フォローの場合のみ相手のディスコードIDを表示できる
+・ユーザー間スレッドを他人に見れない形で作れる
+・ユーザーをブロックできる
+・掲示板にスレッドを立てられる
+・建てるスレッドに趣味のジャンルを指定できる
+・建てられたスレッドにコメントできる
+・掲示板を時系列で最新順で5時間以内のものとそうでないものに分けて表示できる
+・スレッドをジャンルで探すことができる
+・スレッドに投稿されたコメントからユーザーページに飛べる
+・adminにメールを送れる
+・adminからのメールが見れる
