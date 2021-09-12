@@ -11,22 +11,30 @@
 #   password: 'test123456'
 # )
 
- User.create!(
-     email: 'user@mail.com',
-     password: '123456',
-     name: '試作品１号',
-     user_status: 'true',
-     code: '123456789',
-     introduction: 'よろしくおねがいします',
-     genre_id: '1'
-     )
+ # User.create!(
+ #     email: 'user@mail.com',
+ #     password: '123456',
+ #     name: '試作品１号',
+ #     user_status: 'true',
+ #     code: '123456789',
+ #     introduction: 'よろしくおねがいします',
+ #     genre_id: '1'
+ #     )
      
- User.create!(
-     email: 'user2@mail.com',
-     password: '123456',
-     name: '試作品２号',
-     user_status: 'false',
-     code: '123456789',
-     introduction: 'よろしくおねがいします',
-     genre_id: '1'
-     )
+ # User.create!(
+ #     email: 'user2@mail.com',
+ #     password: '123456',
+ #     name: '試作品２号',
+ #     user_status: 'false',
+ #     code: '123456789',
+ #     introduction: 'よろしくおねがいします',
+ #     genre_id: '1'
+ #     )
+ 
+ Genre.create!(
+       name: 'アニメ総合'
+  )
+  
+ Genre.create!(
+       name: 'ゲーム総合'
+  )

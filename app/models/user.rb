@@ -11,6 +11,8 @@ class User < ApplicationRecord
          has_many :genres
          has_many :relationships,     dependent: :destroy
          
+         attachment :image
+         
          
          validates :name,  presence: true
 end

@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     resources :genres,      onry: [:index, :destroy, :create]
     resources :answers,     onry: [:index, :show,:update, :create]
     resources :users,       onry: [:index, :show, :update]
+    
+    get '/search',          to: 'searchs#search'
   end
   
   
@@ -36,7 +38,7 @@ Rails.application.routes.draw do
   resources :boards,       onry: [:new, :show, :index, :create]
   resources :inquiries,    only: [:index, :show, :create] 
   
-  
+  get '/search',           to: 'searchs#search'
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
