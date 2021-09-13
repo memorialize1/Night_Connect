@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'board_searchs/search'
   #ユーザーのログイン
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -39,6 +40,7 @@ Rails.application.routes.draw do
   resources :inquiries,    only: [:index, :show, :create] 
   
   get '/search',           to: 'searchs#search'
+  get '/board_search',           to: 'board_searchs#search'
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -1,0 +1,2 @@
+module BoardSearchsHelper
+end
