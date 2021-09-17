@@ -58,3 +58,61 @@
       -1px  0px 0px rgba(0, 0, 0, 0.56),
        0px -1px 0px rgba(0, 0, 0, 0.56);        /* 文字の影 */
 }
+
+
+.title{
+  text-align: center;
+}
+
+.contents {
+  margin        : left;
+  padding       : 2px;
+  border        : 0.5px solid #dee2e6;
+  margin        : auto;                 /* サンプル用 中央寄せ */
+  box-sizing    : border-box;           /* 罫線も含む長さ      */
+  background    : #fffbf5;              /* BOXの背景色         */
+}
+
+.no {
+  width         : 50px;
+  background  : linear-gradient(135deg, #6666ff, #ffffff);  /* BOXのグラデーション */
+}
+
+.name {
+  text-align: center;
+  width         : 200px;
+}
+
+.time {
+  width         : 75px;
+  text-align: center;
+}
+
+.destroy {
+  width         : 50px;
+  text-align: center;
+}
+
+.comment {
+  border        : 0.5px solid #dee2e6;
+}
+
+.button {
+  display       : inline-block;
+  border-radius : 5%;          /* 角丸       */
+  font-size     : 18pt;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 12px 12px;   /* 余白       */
+  background    : linear-gradient(135deg, #ffffff, #66ff66, #66ff66);     /* 背景色     */
+  color         : #ffffff;     /* 文字色     */
+  line-height   : 1em;         /* 1行の高さ  */
+  transition    : .3s;         /* なめらか変化 */
+  box-shadow    : 5px 5px 15px #666666;  /* 影の設定 */
+  border        : 2px solid #3aad0c;    /* 枠の指定 */
+}
+.button:hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+  opacity       : 1;           /* カーソル時透明度 */
+  color         : #ffffff;     /* 文字色     */
+}

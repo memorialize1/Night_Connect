@@ -24,3 +24,16 @@
   line-height: normal;
 }
 
+.navbar-expand {
+  background  : linear-gradient(to bottom, #23242b, #1a1aff, #00ffff);  /* BOXのグラデーション */
+}
+
+.body {
+  background-color : #d7c7f2;
+}
+
+.actions {
+  text-align    : center;
+  display       : grid;
+}
+

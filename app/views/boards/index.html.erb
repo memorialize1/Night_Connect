@@ -33,7 +33,47 @@
 </header>
 
 <div class = "container">
-  <table class = "table">
-    
-  </table>
+  <div class = "row justify-content-center mt-5">
+    <table class ="table">
+      <thead>
+        
+        <h2>公式スレッド</h2>
+        
+        <tr>
+          <th>スレッドタイトル</th>
+          <th></th>
+          <th>作成日</th>
+          <th>更新日</th>
+          <th>コメント数</th>
+          <th colspan="6"></th>
+        </tr>
+        
+      </thead>
+      
+      <tbody>
+        
+        <% @select.each do |board| %>
+          
+          <tr>
+            <td><%= link_to board.title, board_path(board) %></td>
+            <td></td>
+            <td><%= l board.created_at %></td>
+            <td><%= l board.updated_at%></td>
+            <td><%= board.board_comments.count %></td>
+            <td></td>
+          </tr>
+        
+        <% end %>
+        
+      </tbody>
+    </table>
+  </div>
+  
+  <div class = "row justify-content-center mt-5">
+    <table class = "table">
+      
+      <%= render 'index', boards: @boards %>
+      
+    </table>
+  </div>
 </div>

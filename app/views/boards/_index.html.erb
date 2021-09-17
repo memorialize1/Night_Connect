@@ -1,0 +1,41 @@
+
+
+<thead>
+  
+  <h2>スレッド一覧</h2>
+    
+  <tr>
+    <th>スレッドタイトル</th>
+    <th>スレッド主</th>
+    <th>作成日</th>
+    <th>更新日</th>
+    <th>コメント数</th>
+    <th colspan="6"></th>
+  </tr>
+        
+</thead>
+      
+<tbody>
+        
+  <% boards.each do |board| %>
+          
+  <tr>
+    <td><%= link_to board.title, board_path(board) %></td>
+    <td><%= board.user.name %></td>
+    <td><%= l board.created_at %></td>
+    <td><%= l board.updated_at %></td>
+    <td><%= board.board_comments.count %></td>
+    
+    <% if board.user == current_user %>
+    <td>
+      <%= link_to "削除", board_path(board), method: :delete, class: "btn btn-sm btn-outline-danger" %>
+    </td>
+    <% else %>
+    <td></td>
+    <% end %>
+    
+  </tr>
+  
+  <% end %>
+          
+</tbody>

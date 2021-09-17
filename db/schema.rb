@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 2021_09_10_072806) do
     t.text "comment"
     t.integer "user_id"
     t.integer "board_id"
-    t.string "user_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -45,7 +44,7 @@ ActiveRecord::Schema.define(version: 2021_09_10_072806) do
     t.string "title"
     t.integer "genre_id"
     t.integer "user_id"
-    t.string "tag"
+    t.integer "admin_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

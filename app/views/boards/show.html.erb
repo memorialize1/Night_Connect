@@ -1,0 +1,75 @@
+
+<div class = "container">
+  <div class = "rowmt-5">
+    <div class = "offset-1 col-10 mt-5">
+      
+      <table class = "table">
+        
+        <thead>
+          
+          <h2 class = "title"><strong><%= @board.title %></strong></h2>
+          
+          <tr>
+            <th class = "no">No.</th>
+            <th class = "name">投稿者</th>
+            <th class = "time">投稿日</th>
+            <th>コメント</th>
+            <th colspan="5"></th>
+            
+          </tr>
+        </thead>
+        
+        <tbody class = "mt-2">
+          
+          <%= @board.board_comments.each_with_index do |comment, i| %>
+          
+            <tr class = "contents">
+              
+              <td  class = "no">
+                <p><%= i + 1 %></p>
+              </td>
+              
+              <td class = "name"><%= comment.user.name %></td>
+              <td class = "time"><%= l comment.created_at, format: :short %></td>
+              <td class = "comment"><%= comment.comment %></td>
+              
+              <% if comment.user == current_user %>
+                <td class = "destroy"><%= link_to "削除", board_board_comment_path(comment), method: :delete, class: "btn btn-sm btn-outline-danger" %></td>
+              <% else %>
+                <td></td>
+              <% end %>
+              
+            </tr>
+            
+          <% end %>
+          
+        </tbody>
+        
+      </table>
+      
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class = "container">
+    <div class = "row mt-5">
+      <div class = "offset-2 col-8">
+      
+        <%= form_with(model:[@board, @comment], local:true) do |f| %>
+        
+          <div class = "form-group">
+            <%= f.label :コメント %>
+                <%= f.text_area :comment, placeholder:"ここに内容を書こう！", autofocus: true, class: "form-control" %>
+          </div>
+          
+          <div class="actions">
+            <%= f.submit "投稿", class: "button3" %>
+          </div>
+          
+        <% end %>
+      
+      </div>
+    </div>
+  </div>
+</footer>

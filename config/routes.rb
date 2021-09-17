@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'board_searchs/search'
+  
   #ユーザーのログイン
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -19,8 +19,10 @@ Rails.application.routes.draw do
     resources :genres,      onry: [:index, :destroy, :create]
     resources :answers,     onry: [:index, :show,:update, :create]
     resources :users,       onry: [:index, :show, :update]
+    resources :boards,       onry: [:new, :show, :index, :create, :destroy]
     
-    get '/search',          to: 'searchs#search'
+    get '/search',                  to: 'searchs#search'
+    get '/board_search',            to: 'board_searchs#search'
   end
   
   
@@ -29,18 +31,17 @@ Rails.application.routes.draw do
   root 'homes#top'
   
   get "about" =>"homes#about"
+  resources :relationships,     only: [:show, :create, :destroy]
+  resources :followers,         only: [:show]
+  resources :inquiries,         only: [:index, :show, :create] 
+  resources :users,             only: [:index, :show, :edit, :update,]
+  resources :boards,            onry: [:new, :show, :index, :create, :destroy] do
+    resources :board_comments,  only: [:create, :destroy]
+  end
   
-  get '/users/:id/withdrow' => 'users#withdrow', as: 'withdrow_user'
-  #退会画面への遷移
-  patch '/users/:id/withdrow' => 'users#switch', as: 'withdrow_switch_user'
-  #会員ステータスの切替
-
-  resources :users,        only: [:index, :show, :edit, :update,]
-  resources :boards,       onry: [:new, :show, :index, :create]
-  resources :inquiries,    only: [:index, :show, :create] 
   
-  get '/search',           to: 'searchs#search'
-  get '/board_search',           to: 'board_searchs#search'
+  get '/search',                  to: 'searchs#search'
+  get '/board_search',            to: 'board_searchs#search'
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

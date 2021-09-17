@@ -75,3 +75,5 @@ gem 'kaminari','~> 1.1.1'
 
 gem 'pry-byebug'
 gem 'pry-rails'
+
+gem 'i18n_generators'

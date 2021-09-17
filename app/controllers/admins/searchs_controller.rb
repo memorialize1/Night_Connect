@@ -4,8 +4,8 @@ class Admins::SearchsController < ApplicationController
     @method = params["method"]
     # 検索ワードを@contentに代入。
     @content = params["content"]
-    # @model, @content, @methodを代入した、
-    # search_forを@recordsに代入
+    # @content, @methodを代入した、
+    # search_forをsearchsに代入
     searchs = search_for(@content, @method)
     @users = searchs.page(params[:page]).reverse_order
 

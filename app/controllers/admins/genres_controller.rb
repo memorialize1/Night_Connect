@@ -10,6 +10,8 @@ class Admins::GenresController < ApplicationController
     if @genre.save
       redirect_to admins_genres_path
     else
+      @genres = Genre.all
+      @genre  = Genre.new
       render "index"
     end
   end

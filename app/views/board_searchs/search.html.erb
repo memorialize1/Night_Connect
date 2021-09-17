@@ -1,6 +1,61 @@
-<h1>BoardSearchs#search</h1>
 
+<header class = "header">
+  <div class = "container">
+    <div class = "row justify-content-center mt-5">
+      
+      <div class = "offset-1 col-4">
+        
+        <div class = "button3">
+          
+          <%= link_to "スレッドを新規作成！", new_admins_board_path, class: "link" %>
+          
+        </div>
+        
+      </div>
+      
+      <div class = "offset-1 col-6">
+        
+        <%= form_with url:board_search_path, method: :get, local: true do |f| %>
+          <!--<div class = "select">-->
+          <!--  <p class = "button">ジャンル</p>-->
+          <!--</div>-->
+          <div class = "searchArea">
+            
+            <%= select_tag 'model', options_for_select({ "ジャンル" => "genre", "スレッド名" => "board" }) %>
+            <%= select_tag 'method', options_for_select({ "完全一致" => "perfect", "部分一致" => "partial", "前方一致" => "forward_match", "後方一致" => "backward_match" }) %>
+            <%= f.text_field 'content', placeholder: "タイトル", class: "searchText" %>
+            
+            <div class = "searchButton">
+              
+              <%= f.submit "検索", class: "btn btn-success" %>
+            
+            </div>
+          </div>
+        <% end %>
+        
+      </div>
+      
+    </div>
+  </div>
+</header>
 
+<div class = "container">
+  <div class = "row justify-content-center mt-5">
+    <table class ="table">
 
-
-<p>Find me in app/views/board_searchs/search.html.erb</p>
+  <div class = "row justify-content-center mt-5">
+    <table class = "table">
+      
+      <% if @model == 'board' %>
+      
+        <%= render 'index', boards: @boards %>
+      
+      <% else %>
+      
+        <%= render 'index2', genres: @boards %>
+      
+      <% end %>
+      
+    </table>
+  </div>
+</div>

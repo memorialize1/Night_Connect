@@ -5,7 +5,7 @@ class BoardSearchsController < ApplicationController
     @content = params["content"]
     @method = params["method"]
     searchs = search_for(@model, @content, @method)
-    @users = searchs.page(params[:page]).reverse_order
+    @board = searchs.page(params[:page]).reverse_order
 
   end
 
@@ -13,7 +13,7 @@ class BoardSearchsController < ApplicationController
 
   def search_for(model, content, method)
     
-    # 選択したモデルがuserだったら
+    # 選択したモデルがgenreだったら
     if model == 'genre'
       # 選択した検索方法がが完全一致だったら
 
@@ -31,30 +31,30 @@ class BoardSearchsController < ApplicationController
         Genre.where("name LIKE ?",'%'+content)
 
       else
-        Board.all
+        Genre.all
       end
 
     # 選択したモデルがbookだったら
-    elsif model == 'book'
+    elsif model == 'board'
       
       # 選択した検索方法がが完全一致だったら
       if method == 'perfect'
-        User.where(name: content)
+        Board.where(name: content)
         
       # 選択した検索方法がが部分一致だったら
       elsif method == 'partial'
-        User.where('name LIKE ?', '%'+content+'%')
+        Board.where('name LIKE ?', '%'+content+'%')
         
       # 選択した検索方法がが前方一致だったら
       elsif method == "forward_match"
-        User.where("name LIKE ?", content+'%')
+        Board.where("name LIKE ?", content+'%')
         
       # 選択した検索方法がが後方一致だったら
       elsif method == "backward_match"
-        User.where("name LIKE ?",'%'+content)
+        Board.where("name LIKE ?",'%'+content)
   
       else
-        User.all
+        Board.all
       end
     
     end

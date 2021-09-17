@@ -15,11 +15,11 @@
         
       <% if request.fullpath.include? "admin"  %>
       
-       <nav class="navbar navbar-expand navbar-dark bg-dark navbar-fixed-top", style="background-color: #3e1c4d;">
+       <nav class="navbar navbar-expand navbar-dark navbar-fixed-top">
         <div class="container">
-          <div class="row">
+          <!--<div class="row">-->
             
-            <%= link_to "Night Connect", admins_root_path, class: "navbar-brand pull-left" %>
+            <%= link_to "Night Connect", admins_root_path, class: "fas fa-cloud-moon navbar-brand pull-left" %>
             
             <% if admin_signed_in? %>
             
@@ -34,6 +34,10 @@
               </li>
               
               <li class="nav-item">
+                <%= link_to "スレッド一覧", admins_boards_path, class: "nav-link" %>
+              </li>
+              
+              <li class="nav-item">
                <%= link_to "お問い合わせ一覧", admins_answers_path, class: "nav-link" %>
               </li>
               
@@ -45,13 +49,13 @@
             
             <% end %>
             
-          </div>
+          <!--</div>-->
         </div>
        </nav>
        
       <% else %>
       
-       <nav class="navbar navbar-expand navbar-dark navbar-fixed-top", style="background-color: #3e1c4d;">
+       <nav class="navbar navbar-expand navbar-dark navbar-fixed-top">
          <div class="container">
           <div class="navbar-header">
               
