@@ -7,7 +7,8 @@ class CreateInquiries < ActiveRecord::Migration[5.2]
       t.string  :title
       t.text    :inquiry
       t.integer :user_id
-      t.boolean :mail_status,        default: true, null: false
+      t.boolean :reading,         default: true, null: false
+      t.integer :mail_status,     default: 0, null: false
 
       t.timestamps
     end

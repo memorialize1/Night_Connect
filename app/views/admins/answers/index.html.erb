@@ -1,0 +1,73 @@
+
+<div class = "container">
+  <div class = "row mt-5">
+    <div class = "offset-2 col-8">
+      
+      <table class = "table">
+        <thead>
+          
+          <h2 class = "text-center">お問い合わせ一覧</h2>
+          
+          <tr>
+            <th>ID</th>
+            <th>ユーザー名</th>
+            <th>件名</th>
+            <th>お問い合わせ日</th>
+            <th>回答日</th>
+            <th>閲覧</th>
+            <th>ステータス</th>
+            <th colspan="7"></th>
+          </tr>
+          
+        </thead>
+      
+      
+        <tbody>
+          
+          <% @answers.each do |answer| %>
+          
+            <tr>
+              <td><%= answer.user_id %></td>
+              <td><%= link_to answer.user.name, admins_user_path(answer.user) %></td>
+              <td><%= link_to answer.title, admins_answer_path(answer) %> </td>
+              <td><%= l answer.created_at %></td>
+              
+              <% if answer.answers.present? %>
+                <td><%= l answer.answer.created_at %></td>
+              <% else %>
+                <td>
+                  <p>未回答</p>
+                </td>
+              <% end %>
+              
+              <% if answer.reading == true %>
+                <td>
+                  <strong>未読</strong>
+                </td>
+              <% else %>
+                <td>
+                  <strong>既読</strong>
+                </td>
+              <% end %>
+              
+              <% if answer.mail_status == 0 %>
+                <td>
+                  <strong>未着手</strong>
+                </td>
+              <% elsif answer.mail_status == 1 %>
+                <td>
+                  <strong>作業中</strong>
+                </td>
+              <% elsif answer.mail_status == 2 %>
+                <td>
+                  <strong>作業完了</strong>
+                </td>
+              <% end %>
+              
+            </tr>
+          <% end %>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>

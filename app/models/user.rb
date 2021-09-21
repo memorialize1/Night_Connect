@@ -11,6 +11,7 @@ class User < ApplicationRecord
          has_many :genres
          
          
+         
          attachment :image
          
          
@@ -57,5 +58,9 @@ class User < ApplicationRecord
           #self.followings = self(user).followings(relationships.follow) つまり、ユーザーを入り口としてフォローが紐づいているものを探す
           #includeは含まれているかどうかを聞いているので、フォローしている人の中に今回のユーザーはいますか？と聞いている。
         end
+        
+        #以下チャット機能
+        has_many        :relation_rooms
+        has_many        :rooms
          
 end

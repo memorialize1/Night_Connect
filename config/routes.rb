@@ -16,13 +16,15 @@ Rails.application.routes.draw do
   
   namespace :admins do
     root 'homes#top'
-    resources :genres,      onry: [:index, :destroy, :create]
-    resources :answers,     onry: [:index, :show,:update, :create]
-    resources :users,       onry: [:index, :show, :update]
-    resources :boards,       onry: [:new, :show, :index, :create, :destroy]
     
     get '/search',                  to: 'searchs#search'
     get '/board_search',            to: 'board_searchs#search'
+    
+    resources :genres,        onry: [:index, :destroy, :create]
+    resources :answers,       onry: [:index, :show,:update, :create, :destroy]
+    resources :users,         onry: [:index, :show, :update]
+    resources :boards,        onry: [:new, :show, :index, :create, :destroy]
+    
   end
   
   
@@ -33,7 +35,7 @@ Rails.application.routes.draw do
   get "about" =>"homes#about"
   resources :relationships,     only: [:show, :create, :destroy]
   resources :followers,         only: [:show]
-  resources :inquiries,         only: [:index, :show, :create] 
+  resources :inquiries,         only: [:index, :new, :show, :create] 
   resources :users,             only: [:index, :show, :edit, :update,]
   resources :boards,            onry: [:new, :show, :index, :create, :destroy] do
     resources :board_comments,  only: [:create, :destroy]

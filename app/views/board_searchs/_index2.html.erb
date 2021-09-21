@@ -1,5 +1,13 @@
 
 
+
+<% genres.each do |genre| %>
+
+<h4>ジャンル名</h4>
+
+<%= genre.name %>
+
+
 <thead>
   
   <h2>スレッド一覧</h2>
@@ -16,9 +24,7 @@
 </thead>
       
 <tbody>
-        
-  <% genres.boards.each do |board| %>
-          
+  <% genre.boards.each do |board| %>
   <tr>
     <td><%= link_to board.title, board_path(board) %></td>
     <td><%= board.user.name %></td>
@@ -29,5 +35,6 @@
   </tr>
   
   <% end %>
+<% end %>
           
 </tbody>

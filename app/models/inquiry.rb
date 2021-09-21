@@ -8,4 +8,5 @@ class Inquiry < ApplicationRecord
   validates :inquiry,  presence: true
   validates :user_id,   presence: true
   
+  
 end
