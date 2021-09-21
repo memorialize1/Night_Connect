@@ -61,6 +61,25 @@ class User < ApplicationRecord
         
         #以下チャット機能
         has_many        :relation_rooms
+        has_many        :room_followings, through: :Relation_room, source: :participant
+        has_many        :reverse_of_relation_rooms, class_name: 'Relation_room', foreign_key: 'participant_id'
+        has_many        :room_user, through: :reverse_of_relation_rooms, source: :room
+        
         has_many        :rooms
-         
+        
+        def participant_user(room, other_user)
+            room.relation_room.find_or_create_by(participant_id: other_user.id)
+            #find_or_create_byとは・・・同じ組み合わせが無いか探し、なければ作成(.new .)
+        end
+        
+        def release(room, other_user) #followがあった場合
+          relation_room = room.relation_room.find_by(participant_id: other_user.id)
+          relation_room.destroy if relation_room #relation_roomがあれrelation_roomを削除
+        end
+        
+        def room_following?(room, other_user) #フォローしている？
+          room.room_followings.include?(other_user)
+          #self.followings = self(user).followings(relationships.follow) つまり、ユーザーを入り口としてフォローが紐づいているものを探す
+          #includeは含まれているかどうかを聞いているので、フォローしている人の中に今回のユーザーはいますか？と聞いている。
+        end
 end

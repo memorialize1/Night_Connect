@@ -17,8 +17,14 @@ class Admins::AnswersController < ApplicationController
   
   def create
     @answer = Answer.new(answer_params)
+    dess = @answer.inquiry_id
+    nill = Inquiry.find(dess)
     if @answer.save
-      redirect_to admins_answer_path(@inquiry)
+      #下記更新日時登録のため
+      nill = Inquiry.find(dess)
+      gss = @answer.id
+      nill.update(add_id: gss)
+      redirect_to admins_answer_path(@answer.inquiry_id)
     else
       redirect_back(fallback_location: root_path)
     end

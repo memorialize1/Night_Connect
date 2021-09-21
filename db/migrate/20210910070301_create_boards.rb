@@ -6,6 +6,8 @@ class CreateBoards < ActiveRecord::Migration[5.2]
       t.integer :genre_id
       t.integer :user_id
       t.integer :admin_id
+      
+      t.integer :add_id #コメント追加時に更新
       #Adminが作成した基本スレッドを上方に固定するためのタグ
 
       t.timestamps

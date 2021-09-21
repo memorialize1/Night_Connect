@@ -6,7 +6,8 @@ class BoardCommentsController < ApplicationController
     @comment.user_id = current_user.id
     @comment.board_id = @board.id
     if @comment.save
-      redirect_to board_path(@board)
+       @board.update(add_id: @comment.id)
+       redirect_to board_path(@board)
     else
       render 'index'
     end

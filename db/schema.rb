@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2021_09_20_030334) do
     t.integer "genre_id"
     t.integer "user_id"
     t.integer "admin_id"
+    t.integer "add_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -67,6 +68,7 @@ ActiveRecord::Schema.define(version: 2021_09_20_030334) do
     t.string "title"
     t.text "inquiry"
     t.integer "user_id"
+    t.integer "add_id"
     t.boolean "reading", default: true, null: false
     t.integer "mail_status", default: 0, null: false
     t.datetime "created_at", null: false
@@ -74,10 +76,13 @@ ActiveRecord::Schema.define(version: 2021_09_20_030334) do
   end
 
   create_table "relation_rooms", force: :cascade do |t|
-    t.integer "user_id"
     t.integer "room_id"
+    t.integer "user_id"
+    t.integer "participant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["participant_id"], name: "index_relation_rooms_on_participant_id"
+    t.index ["user_id"], name: "index_relation_rooms_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -90,7 +95,10 @@ ActiveRecord::Schema.define(version: 2021_09_20_030334) do
   end
 
   create_table "rooms", force: :cascade do |t|
+    t.text "name"
     t.integer "relation_room_id"
+    t.integer "user_id"
+    t.integer "add_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

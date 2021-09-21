@@ -26,8 +26,8 @@
                 
               <td><%= link_to answer.title, inquiry_path(answer), class: "linkbox" %> </td>
               <td><%= l answer.created_at %></td>
-              <% if answer.answers.present? %>
-                <td><%= l answer.answer.created_at %></td>
+              <% if answer.updated_at =! answer.created_at %>
+                <td><%= l answer.answer.updated_at %></td>
               <% else %>
                 <td>
                   <p>未回答</p>

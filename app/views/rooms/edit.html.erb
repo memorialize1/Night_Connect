@@ -1,0 +1,52 @@
+<div class = "container">
+
+  <div class = "row">
+
+    <div class = "offset-2 col-8">
+      <table class = "table">
+        <h1>
+        👤フォロー<%= @follows.count %>人
+        <% @follows.each do |follow| %>
+        </h1>
+        <tr>
+
+          <td>
+            <%= attachment_image_tag(follow, :image, :fill, 50, 50, fallback: "no_image.jpg") %>
+          </td>
+
+          <td><%= follow.name %></td>
+
+          <td><%= link_to 'Show', user_path(follow) %></td>
+
+
+          <td>
+            <% if @room.room_following?(@room, user) %>
+            
+              <p>参加しています</p>
+              
+            <% else %>
+            
+              <%= form_with model:follow, url:room_relation_rooms_path do |f| %>
+              
+                <%= f.hidden_field :user_id, value: user.id %>
+                <%= f.hidden_field :room_id, value: @room.id %>
+                
+                <div class = "form-group">
+                  <%= f.submit '参加！', class: 'btn btn-primary btn-block' %>
+                </div>
+                
+              <% end %>
+              
+            <% end %>
+          </td>
+
+
+        </tr>
+
+        <% end %>
+
+      </table>
+    </div>
+
+  </div>
+</div>

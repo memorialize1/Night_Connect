@@ -1,7 +1,7 @@
 
 <div class = "container">
   <div class = "row mt-5">
-    <div class = "offset-2 col-8">
+    <div class = "col-12">
       
       <table class = "table">
         <thead>
@@ -33,7 +33,7 @@
               <td><%= l answer.created_at %></td>
               
               <% if answer.answers.present? %>
-                <td><%= l answer.answer.created_at %></td>
+                <td><%= l answer.updated_at %></td>
               <% else %>
                 <td>
                   <p>未回答</p>
