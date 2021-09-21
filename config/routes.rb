@@ -41,6 +41,10 @@ Rails.application.routes.draw do
     resources :board_comments,  only: [:create, :destroy]
   end
   
+    resources :rooms,             onry: [:new, :index, :show, :create, :update, :destroy] do
+    resources :chat_comments,   onry: [:create, :destroy]
+  end
+  
   
   get '/search',                  to: 'searchs#search'
   get '/board_search',            to: 'board_searchs#search'
