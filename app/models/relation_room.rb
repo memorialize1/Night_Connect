@@ -1,8 +1,7 @@
 class RelationRoom < ApplicationRecord
   
   belongs_to :room
-  belongs_to :Participant, class_name: 'User'
-  belongs_to :user
+  belongs_to :participant, class_name: 'User'
   
   
   validates :room_id,         presence: true

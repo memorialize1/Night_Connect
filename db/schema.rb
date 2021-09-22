@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2021_09_20_030334) do
 
   create_table "boards", force: :cascade do |t|
     t.string "title"
-    t.integer "genre_id"
+    t.integer "genre_id", null: false
     t.integer "user_id"
     t.integer "admin_id"
     t.integer "add_id"
@@ -77,12 +77,9 @@ ActiveRecord::Schema.define(version: 2021_09_20_030334) do
 
   create_table "relation_rooms", force: :cascade do |t|
     t.integer "room_id"
-    t.integer "user_id"
     t.integer "participant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["participant_id"], name: "index_relation_rooms_on_participant_id"
-    t.index ["user_id"], name: "index_relation_rooms_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -106,11 +103,11 @@ ActiveRecord::Schema.define(version: 2021_09_20_030334) do
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "name", default: "", null: false
+    t.string "name", null: false
     t.string "code", default: "", null: false
     t.string "image_id", default: "", null: false
     t.text "introduction", default: "", null: false
-    t.integer "genre_id", null: false
+    t.integer "genre_id"
     t.boolean "user_status", default: true, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"

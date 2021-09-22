@@ -1,8 +1,35 @@
 
 <div class = "container">
-  <div class = "row">
-    <div class = "offset-2 col-8">
+  <div class = "row mt-5">
+    
+    <div class = "col-3">
+      <h4>グループリーダー</h4>
+      <%= render 'info', master: @room %>
+      
+    </div>
+    
+    <div class = "offset-1 col-8">
+      
+      <h2 class = "text-center"><strong><%= @room.name %></strong></h2>
+      
+      <%= render 'chat', comments: @room %>
       
     </div>
   </div>
 </div>
+
+<footer class = "footer">
+  <div class = "tools">
+    <%= form_with(model:[@room, @comment], url:room_chat_comments_path(@room), local:true) do |f| %>
+    <div class = "table w-75">
+      <div class = "form-group">
+        <%= f.hidden_field :room_id, value: @room.id, class: "form-control" %>
+        <%= f.text_area :chat_comment, autofocus: true, class: "form-control" %>
+      </div>
+      <div class="actions">
+        <%= f.submit "送信", class: "button" %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</footer>

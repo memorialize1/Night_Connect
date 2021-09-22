@@ -7,7 +7,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
       
-      t.string :name,               null: false, default: ""
+      t.string :name,               null: false
       #ユーザーの表示名
       t.string :code,               null: false, default: ""
       #ユーザー他ＳＮＳアカウントのＩＤ
@@ -17,7 +17,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.text :introduction,         null: false, default: ""
       #自己紹介文
       
-      t.integer :genre_id,          null: false, default: ""
+      t.integer :genre_id
       #趣味ジャンルのＩＤ
       
       t.boolean :user_status,       default: true, null: false

@@ -3,7 +3,7 @@ class CreateBoards < ActiveRecord::Migration[5.2]
     create_table :boards do |t|
       
       t.string  :title
-      t.integer :genre_id
+      t.integer :genre_id,          null: false, default: ""
       t.integer :user_id
       t.integer :admin_id
       

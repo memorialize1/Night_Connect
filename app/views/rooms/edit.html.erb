@@ -20,16 +20,15 @@
 
 
           <td>
-            <% if @room.room_following?(@room, user) %>
+            <% if @room.relation_rooms.find_by(participant_id: follow.id) %>
             
               <p>参加しています</p>
               
             <% else %>
             
-              <%= form_with model:follow, url:room_relation_rooms_path do |f| %>
+              <%= form_with model:@set_room_user, url:room_relation_rooms_path(@room.id), method: :post, local:true do |f| %>
               
-                <%= f.hidden_field :user_id, value: user.id %>
-                <%= f.hidden_field :room_id, value: @room.id %>
+                <%= f.hidden_field :participant_id, value: follow.id %>
                 
                 <div class = "form-group">
                   <%= f.submit '参加！', class: 'btn btn-primary btn-block' %>

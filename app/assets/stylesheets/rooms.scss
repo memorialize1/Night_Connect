@@ -1,3 +1,56 @@
 // Place all the styles related to the rooms controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.table {
+  margin             : auto;
+}
+
+.chat {
+  margin             : auto;
+  width          : 100%;                /* BOXの幅             */
+}
+
+
+.td {
+  vertical-align : middle;               /* 縦位置              */
+}
+
+.user {
+  widows         : 30%;
+}
+
+.my {
+  margin         : auto;                 /* サンプル用 中央寄せ */
+  box-sizing     : border-box;           /* 罫線も含む長さ      */
+  width          : 50%;                /* BOXの幅             */
+  height         : 150px;                /* BOXの高さ           */
+  background     : rgba(153, 204, 255, 0.3);              /* BOXの背景色         */
+  border         : 0.3px solid #999999;    /* 枠線の指定          */
+  text-align     : right;                /* 横位置              */
+  
+}
+
+.size {
+  width          : 20%;
+  border         : 0.3px solid #999999;    /* 枠線の指定          */
+}
+
+.chat_comment{
+  width          : 70%;
+}
+
+.other {
+  margin         : auto;                 /* サンプル用 中央寄せ */
+  box-sizing     : border-box;           /* 罫線も含む長さ      */
+  width          : 50%;                /* BOXの幅             */
+  height         : 150px;                /* BOXの高さ           */
+  background     : rgba(153, 204, 255, 0.3);              /* BOXの背景色         */
+  border         : 0.1px solid #999999;    /* 枠線の指定          */
+}
+
+.my tr {
+  display        : table-cell;           /* セル属性に変更      */
+  
+  
+}

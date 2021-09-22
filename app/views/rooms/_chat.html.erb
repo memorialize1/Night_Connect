@@ -1,0 +1,36 @@
+
+
+  
+  <% comments.chats.each do |chat| %>
+    <% if chat.user == current_user %>
+    <table class = "chat">
+      <tr class = "my">
+        
+        <td><%= chat.chat_comment %></td>
+        <td class = "size">
+          <div class = "user">
+            <%= attachment_image_tag(chat.user, :image, :fill, 50, 50, fallback: "no_image.jpg") %></br>
+            <%= chat.user.name %>
+          </div>
+        </td>
+        
+      </tr>
+    </table>
+    <% else %>
+    <table class = "chat">
+      <tr class = "other">
+        
+        <td class = "size">
+          <div class = "user">
+            <%= attachment_image_tag(chat.user, :image, :fill, 50, 50, fallback: "no_image.jpg") %></br>
+            <%= chat.user.name %>
+          </div>
+        </td>
+        
+        <td><%= chat.chat_comment %></td>
+        
+      </tr>
+    </table>
+    <% end %>
+  <% end %>
+    

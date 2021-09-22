@@ -3,11 +3,10 @@ class CreateRelationRooms < ActiveRecord::Migration[5.2]
     create_table :relation_rooms do |t|
       
       
-      t.integer   :room_id
+      t.integer :room_id
+      # t.references :my_room,        foreign_key: { to_table: :room } 
       
-      t.references :user, foreign_key: true 
-      #外部キー取得のコマンド。異なるモデルのテーブルの情報を識別する。これでusersのテーブルと紐づけ
-      t.references :participant, foreign_key: { to_table: :users } 
+      t.integer :participant_id,    foreign_key: { to_table: :users } 
 
       t.timestamps
     end

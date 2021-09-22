@@ -8,6 +8,24 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def new
   #   super
   # end
+  
+  def new
+    @user = User.new
+  end
+  
+  def create
+    @user = User.new(user_params)
+    if @user.save
+      sign_up(resource_name, @user)
+      redirect_to user_path(@user)
+    else
+      @errors = @user.errors
+      # byebug
+      redirect_back(fallback_location: root_path)
+    end
+  end
+  
+  
 
   # POST /resource
   # def create
@@ -59,4 +77,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+  
+  private
+  
+  def user_params
+    params.require(:user).permit(:name, :password, :email, :password_confirmation)
+  end
+  
+  
 end

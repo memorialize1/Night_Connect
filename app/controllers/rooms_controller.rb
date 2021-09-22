@@ -5,36 +5,39 @@ class RoomsController < ApplicationController
   end
   
   def index
-    @user = User.find(current_user[:id])
+    @rooms = Room.all
+    # byebug
     @room = Room.new
-    # @rooms = @user.room_user
     
     
   end
   
   def show
     @room = Room.find(params[:id])
+    @comment = Chat.new
   end
   
   def edit
     @user = User.find(current_user[:id])
     @room = Room.find(params[:id])
     @follows = @user.followings
+    @set_room_user = RelationRoom.new
+    
   end
+  
+  
+  def group_edit
+    
+  end
+  
   
   def create
     @room = Room.new(room_params)
     @room.user_id = current_user.id
     if @room.save
-      redirect_to edit_room_path(@room)
-    else
-      redirect_back(fallback_location: root_path)
-    end
-  end
-  
-  def create2
-    @room = Room.new(relation_room_params)
-    if @room.save
+      user = current_user
+      nill = relation_room_create(@room, user)
+      nill.save
       redirect_to edit_room_path(@room)
     else
       redirect_back(fallback_location: root_path)
@@ -52,12 +55,17 @@ class RoomsController < ApplicationController
   
   private
   
+  def relation_room_create(room, other_user)
+      RelationRoom.find_or_create_by(room_id: room.id, participant_id: other_user.id)
+      #find_or_create_byとは・・・同じ組み合わせが無いか探し、なければ作成(.new .)
+  end
+  
   def room_params
     params.require(:room).permit(:relation_room_id, :name)
   end
   
   def relation_room_params
-    params.require(:relation_room).permit(:room_id, :user_id)
+    params.permit(:room_id, :participant_id)
   end
   
 end

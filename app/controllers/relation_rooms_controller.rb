@@ -1,10 +1,11 @@
 class RelationRoomsController < ApplicationController
   
   def create
-    @user = User.find(params[:relationship][:follow_id])
+    @user = User.find(params[:relation_room][:participant_id])
     @room = Room.find(params[:room_id])
-    nill = @room.participant_user(@room, @user)
+    nill = participant_user(@room, @user)
     if nill.save
+      @room.update(relation_room_id: nill.id)
       flash[:success] = 'プレイヤーを追加しました'
       redirect_back(fallback_location: root_path)
     else
@@ -26,5 +27,11 @@ class RelationRoomsController < ApplicationController
     end
   end
   
+  private
+  
+  def participant_user(room, other_user)
+      RelationRoom.find_or_create_by(room_id: room.id, participant_id: other_user.id)
+      #find_or_create_byとは・・・同じ組み合わせが無いか探し、なければ作成(.new .)
+  end
   
 end

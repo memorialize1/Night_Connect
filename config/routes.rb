@@ -44,12 +44,19 @@ Rails.application.routes.draw do
   resources :rooms,               onry: [:new, :index, :show, :edit, :create, :update, :destroy] do
     
     resources :chat_comments,     onry: [:create, :destroy]
-    resources :relation_rooms,    onry: [:create]
+    resources :relation_rooms,    onry: [:create, :update, :destroy]
   end
   
-  post 'rooms_create2',              to: 'rooms#create2'
-  get '/search',                  to: 'searchs#search'
-  get '/board_search',            to: 'board_searchs#search'
+  get 'rooms/:id/group_edit',               to: 'rooms#group_edit', as: 'group_edit'
+  get '/search',                            to: 'searchs#search'
+  get '/board_search',                      to: 'board_searchs#search'
+  
+  
+  get '/users/:id/withdrow' => 'users#withdrow', as: 'withdrow_users'
+  #退会画面への遷移
+  patch '/users/:id/withdrow' => 'users#switch', as: 'withdrow_switch_users'
+  #会員ステータスの切替
+  
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -13,18 +13,18 @@ class User < ApplicationRecord
          
          
          attachment :image
+         validates :name, length: {maximum: 20, minimum: 2}
          
          
-         validates :name,  presence: true
+         
          
          
         #以下フォロー機能
         #フォローしている情報を表示
         has_many :relationships
         has_many :followings, through: :relationships, source: :follow
-        #followwingsモデルを架空で作成し、throughで中間テーブルをrelationshipsに指定。その参照先はfollowです。
-        #これで、user.followwingsと入力するだけでrelationshipsを踏み台にしてそのuser_idに紐づいたフォローしているuserたちを取得できる
-        #user_idをキーとして、そのuser_idに紐づいたカラムfollowのデータを引っ張ってくる
+        #あるユーザーに対して架空のfollowingsモデルが指定された場合、relationshipsのカラムfollowを二次キーとして検索をかける
+      
       
         #フォローされている情報を表示
         has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'follow_id'
@@ -61,16 +61,13 @@ class User < ApplicationRecord
         
         #以下チャット機能
         has_many        :relation_rooms
-        has_many        :room_followings, through: :Relation_room, source: :participant
+        has_many        :room_followings, through: :relation_room, source: :participant
         has_many        :reverse_of_relation_rooms, class_name: 'Relation_room', foreign_key: 'participant_id'
         has_many        :room_user, through: :reverse_of_relation_rooms, source: :room
         
         has_many        :rooms
         
-        def participant_user(room, other_user)
-            room.relation_room.find_or_create_by(participant_id: other_user.id)
-            #find_or_create_byとは・・・同じ組み合わせが無いか探し、なければ作成(.new .)
-        end
+        
         
         def release(room, other_user) #followがあった場合
           relation_room = room.relation_room.find_by(participant_id: other_user.id)
@@ -78,8 +75,15 @@ class User < ApplicationRecord
         end
         
         def room_following?(room, other_user) #フォローしている？
-          room.room_followings.include?(other_user)
+          user.room_followings.include?(room)
           #self.followings = self(user).followings(relationships.follow) つまり、ユーザーを入り口としてフォローが紐づいているものを探す
           #includeは含まれているかどうかを聞いているので、フォローしている人の中に今回のユーザーはいますか？と聞いている。
         end
+        
+        def room_user_check(room, user)
+          room.relation_rooms.find_by(participant_id: user.id, room_id: room.id)
+        end
+          
+          
+          
 end

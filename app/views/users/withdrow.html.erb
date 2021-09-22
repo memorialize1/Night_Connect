@@ -1,0 +1,28 @@
+
+<div class = "container">
+  <div class = "row mt-5">
+    <div class = "offset-2 col-8">
+    
+      <div class = "out">
+        <h1 class = "text-center">退会</h1></br>
+      </div>
+      <div class = "out">
+        <h2 class = "mt-5 text-center">本当に退会しますか？</h2>
+      </div>
+      
+    </div>
+  </div>
+    
+  <div class = "row mt-5">
+      
+    <div class="offset-3 col-2">
+      <%= link_to "やっぱ残る" ,user_path(@user), class: "btn btn-primary" %>
+    </div>
+    
+    <div class="offset-2 col-2">
+      <%= link_to "やはり退会する" , withdrow_switch_users_path(@user),method: :patch, class: "btn btn-danger" %>
+      <!-- 会員ステータスを無効に切り替えるswichアクションを呼ぶ-->
+    </div>
+    
+  </div>
+</div>

@@ -1,0 +1,50 @@
+
+
+<table class='table'>
+  
+  <tr>
+    <td>
+      <%= link_to user_path(master.user) do %>
+        <%= attachment_image_tag(master.user, :image, :fill, 100, 100, fallback: "no_image.jpg") %>
+      <% end %>
+    </td>
+    <td>
+      <strong><%= master.user.name %></strong>
+    </td>
+  </tr>
+
+</table>
+
+<div class = "mt-5"></div>
+
+<table class = "table">
+  
+  <tbody class = "mt-5">
+    
+    <h5>グループメンバー</h5>
+    <% master.relation_rooms.each do |menber| %>
+    <% unless master.user == menber.participant %>
+      <tr>
+        
+        <td>
+          <%= link_to user_path(menber.participant) do %>
+            <%= attachment_image_tag(menber.participant, :image, :fill, 100, 100, fallback: "no_image.jpg") %>
+          <% end %>
+        </td>
+        
+        <td><%= menber.participant.name %></td>
+        
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<table class='table'>
+  <tr>
+    <h5>グループ編集</h5>
+  </tr>
+  <tr>
+    <%= link_to '',group_edit_path(master), method: :get, class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{master.user.id}" %>
+  </tr>
+</table>
