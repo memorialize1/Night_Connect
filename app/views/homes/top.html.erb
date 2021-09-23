@@ -1,7 +1,29 @@
-<h1>Homes#top</h1>
-
-<%= link_to "個別チャット", rooms_path %>
-
-
-
-<p>Find me in app/views/homes/top.html.erb</p>
+<div class = "container">
+  <div class = "row mt-5">
+    <div class = "offset-2 col-8">
+      <% if user_signed_in? %>
+      <table class = "table">
+        <h2 class = "text-center">コンテンツ一覧</h2>
+          <tr>
+            <td><%= link_to "マイページ", user_path(current_user), class: 'btn btn-primary' %></td>
+            <td><%= link_to "スレッド一覧", boards_path, class: 'btn btn-primary' %></td>
+            <td><%= link_to "個別チャット", rooms_path, class: 'btn btn-primary' %></td>
+          </tr>
+      </table>
+      
+      <% else %>
+      
+      <table class = "table align-middle">
+        <h2 class = "text-center">ホームページ</h2>
+        <p class = "text-center">現在あなたはログインしていません！会員登録はお済みですか？</p>
+          <tr class = "align-middle">
+            <td><%= link_to "ユーザー登録", new_user_registration_path, class: "btn btn-primary" %></td>
+            <td><%= link_to "ログイン", new_user_session_path, class: "btn btn-primary" %></td>
+          </tr>
+      </table>
+      
+      <% end %>
+      
+    </div>
+  </div>
+</div>

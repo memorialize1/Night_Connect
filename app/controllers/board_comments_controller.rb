@@ -11,15 +11,25 @@ class BoardCommentsController < ApplicationController
     else
       render 'index'
     end
+    
+    # respond_to do |format|
+    #   if @comment.save
+    #     @board.update(add_id: @comment.id)
+    #     format.html { redirect_back(fallback_location: root_path) } # 前のページに遷移
+    #     format.js  # create.js.erbが呼び出される
+    #   else
+    #     format.html { redirect_back(fallback_location: root_path) } # 前のページに遷移
+    #   end
+    # end
+    
   end
   
   def destroy
-    @board = Board.find(params[:board_id])
-    comment = BoardComment.find(params[:id])
+    comment = BoardComment.find(params[:board_id])
     if comment.update(comment: "このコメントは削除されました")
-      redirect_to board_path(@board)
+      redirect_back(fallback_location: root_path)
     else
-      @board = Board.find(params[:board_id])
+      redirect_back(fallback_location: root_path)
     end
   end
   

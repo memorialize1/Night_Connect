@@ -7,6 +7,13 @@ class UsersController < ApplicationController
     def show
         @user = User.find(params[:id])
         @boards = @user.boards
+        if @user.genre_id == nil
+            @genre = "bag"
+        else
+            @genre = Genre.find(@user.genre_id)
+        end
+        
+        
     end
     
     def edit

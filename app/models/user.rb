@@ -60,12 +60,12 @@ class User < ApplicationRecord
         end
         
         #以下チャット機能
-        has_many        :relation_rooms
-        has_many        :room_followings, through: :relation_room, source: :participant
-        has_many        :reverse_of_relation_rooms, class_name: 'Relation_room', foreign_key: 'participant_id'
-        has_many        :room_user, through: :reverse_of_relation_rooms, source: :room
+        has_many        :relation_rooms,              dependent: :destroy
+        has_many        :room_followings,             through: :relation_room,              source: :participant
+        has_many        :reverse_of_relation_rooms,   class_name: 'Relation_room',          foreign_key: 'participant_id'
+        has_many        :room_user,                   through: :reverse_of_relation_rooms,  source: :room
         
-        has_many        :rooms
+        has_many        :rooms,                       dependent: :destroy
         
         
         

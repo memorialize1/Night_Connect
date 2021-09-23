@@ -27,7 +27,7 @@ class RoomsController < ApplicationController
   
   
   def group_edit
-    
+    @room = Room.find(params[:id])
   end
   
   
@@ -45,11 +45,31 @@ class RoomsController < ApplicationController
   end
   
   def update
+    @room = Room.find(params[:id])
+    if @room.update(room_params)
+      redirect_back(fallback_location: root_path)
+    else
+      redirect_back(fallback_location: root_path)
+    end
+  end
+  
+  def update2
+    
+    menber = RelationRoom.find(params[:id]) 
+    @room = Room.find(menber.room_id)
+    menber.destroy
+    if @room.relation_rooms.find_by(participant_id: current_user.id)
+      redirect_back(fallback_location: root_path)
+    else
+      redirect_to rooms_path
+    end
     
   end
   
   def destroy
-    
+    @room = Room.find(params[:id])
+    @room.destroy
+    redirect_to rooms_path
   end
   
   
@@ -62,6 +82,10 @@ class RoomsController < ApplicationController
   
   def room_params
     params.require(:room).permit(:relation_room_id, :name)
+  end
+  
+  def neme_edit
+    params.permit(:name)
   end
   
   def relation_room_params

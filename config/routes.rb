@@ -23,7 +23,9 @@ Rails.application.routes.draw do
     resources :genres,        onry: [:index, :destroy, :create]
     resources :answers,       onry: [:index, :show,:update, :create, :destroy]
     resources :users,         onry: [:index, :show, :update]
-    resources :boards,        onry: [:new, :show, :index, :create, :destroy]
+    resources :boards,        onry: [:new, :show, :index, :create, :destroy] do
+      resources :board_comments,  only: [:destroy]
+    end
     
   end
   
@@ -48,6 +50,7 @@ Rails.application.routes.draw do
   end
   
   get 'rooms/:id/group_edit',               to: 'rooms#group_edit', as: 'group_edit'
+  put '/rooms/update2/:id',                 to: 'rooms#update2', as: 'menber_update'
   get '/search',                            to: 'searchs#search'
   get '/board_search',                      to: 'board_searchs#search'
   

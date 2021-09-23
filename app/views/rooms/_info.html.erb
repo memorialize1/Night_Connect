@@ -48,3 +48,7 @@
     <%= link_to '',group_edit_path(master), method: :get, class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{master.user.id}" %>
   </tr>
 </table>
+
+<table class = "table mt-5">
+  <%= link_to "ルーム一覧へ戻る", rooms_path, class: 'btn btn-secondary' %>
+</table>

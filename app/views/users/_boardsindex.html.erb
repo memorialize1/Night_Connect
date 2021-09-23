@@ -1,42 +1,52 @@
 
 
-<thead>
+<table class='table'>
   
-  <h2>スレッド一覧</h2>
-    
+  <h2>ユーザー情報</h2>
+  
+  <tr><%= attachment_image_tag(user, :image, :fill, 300, 300, fallback: "no_image.jpg") %></tr>
   <tr>
-    <th>スレッドタイトル</th>
-    <th>スレッド主</th>
-    <th>作成日</th>
-    <th>更新日</th>
-    <th>コメント数</th>
-    <th colspan="6"></th>
+	  <th>ニックネーム</th>
+	  <th><%= user.name %></th>
   </tr>
-        
-</thead>
-      
-<tbody>
-        
-  <% boards.each do |board| %>
-          
+  
   <tr>
-    <td><%= link_to board.title, board_path(board) %></td>
-    <td><%= board.user.name %></td>
-    <td><%= l board.created_at %></td>
-    <td><%= l board.updated_at %></td>
-    <td><%= board.board_comments.count %></td>
-    
-    <% if board.user == current_user %>
+    <td>Discode ID</td>
+    <td><%= user.code %></td>
+  </tr>
+  
+  <tr>
+    <td>好きなジャンル</td>
     <td>
-      <%= link_to "削除", board_path(board), method: :delete, class: "btn btn-sm btn-outline-danger" %>
+      <% unless genre == "bag" %>
+        <%= genre.name %>
+      <% end %>
     </td>
-    <% else %>
-    <td></td>
-    <% end %>
-    
+  </tr>
+
+  <tr>
+
+    <td>フォロー</td>
+    <td>
+      <%= link_to relationship_path(user.id) do %>
+      <%= user.followings.count %>
+      <% end %>
+    </td>
+
+  </tr>
+
+  <tr>
+    <td>フォロワー</td>
+    <td>
+      <%= link_to follower_path(user.id) do %>
+      <%= user.followers.count %>
+      <% end %>
+    </td>
   </tr>
   
-  <% end %>
-          
-</tbody>
+  <tr>
+	  <th>コメント</th>
+	  <th><%= user.introduction %></th>
+  </tr>
 
+</table>
