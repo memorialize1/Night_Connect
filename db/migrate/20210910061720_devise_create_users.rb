@@ -14,7 +14,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.string :image_id,           null: false, default: ""
       #ユーザーの表示画像
       
-      t.text :introduction,         null: false, default: ""
+      t.text :introduction,         null: false
       #自己紹介文
       
       t.integer :genre_id
