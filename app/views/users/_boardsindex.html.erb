@@ -1,20 +1,20 @@
 
 
 <table class='table'>
-  
+
   <h2>ユーザー情報</h2>
-  
+
   <tr><%= attachment_image_tag(user, :image, :fill, 300, 300, fallback: "no_image.jpg") %></tr>
   <tr>
 	  <th>ニックネーム</th>
 	  <th><%= user.name %></th>
   </tr>
-  
+
   <tr>
     <td>Discode ID</td>
     <td><%= user.code %></td>
   </tr>
-  
+
   <tr>
     <td>好きなジャンル</td>
     <td>
@@ -28,7 +28,9 @@
 
     <td>フォロー</td>
     <td>
+      <%= link_to relationship_path(user.id) do %>
       <%= user.followings.count %>
+      <% end %>
     </td>
 
   </tr>
@@ -36,11 +38,12 @@
   <tr>
     <td>フォロワー</td>
     <td>
+      <%= link_to follower_path(user.id) do %>
       <%= user.followers.count %>
-
+      <% end %>
     </td>
   </tr>
-  
+
   <tr>
 	  <th>コメント</th>
 	  <th><%= user.introduction %></th>
