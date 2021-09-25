@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 2021_09_20_030334) do
     t.string "name", null: false
     t.string "code", default: "", null: false
     t.string "image_id", default: "", null: false
-    t.text "introduction", default: "", null: false
+    t.text "introduction"
     t.integer "genre_id"
     t.boolean "user_status", default: true, null: false
     t.string "reset_password_token"
