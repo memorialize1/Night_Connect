@@ -20,22 +20,22 @@
 
 
           <td>
-            <% if @room.relation_rooms.find_by(participant_id: follow.id) %>
-            
+            <% if @room.joind_by?(follow) %>
+
               <p>参加しています</p>
-              
+
             <% else %>
-            
+
               <%= form_with model:@set_room_user, url:room_relation_rooms_path(@room.id), method: :post, local:true do |f| %>
-              
+
                 <%= f.hidden_field :participant_id, value: follow.id %>
-                
+
                 <div class = "form-group">
                   <%= f.submit '参加！', class: 'btn btn-primary btn-block' %>
                 </div>
-                
+
               <% end %>
-              
+
             <% end %>
           </td>
 
@@ -45,11 +45,11 @@
         <% end %>
 
       </table>
-      
+
       <table class = "table">
         <%= link_to "グループを開始！", room_path(@room), class: 'button' %>
       </table>
-      
+
     </div>
 
   </div>

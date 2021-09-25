@@ -3,41 +3,46 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
+
          has_many :inquiries,         dependent: :destroy
          has_many :answers,           dependent: :destroy
          has_many :boards,            dependent: :destroy
          has_many :board_comments,    dependent: :destroy
          has_many :genres
-         
-         
-         
+
+
+
          attachment :image
          validates :name, length: {maximum: 20, minimum: 2}
-         
-         
-         
-         
-         
+
+        #あなたはカレントユーザーですか？
+        def check_user(user)
+          self == user
+        end
+
+
+
+
+
         #以下フォロー機能
         #フォローしている情報を表示
         has_many :relationships
         has_many :followings, through: :relationships, source: :follow
         #あるユーザーに対して架空のfollowingsモデルが指定された場合、relationshipsのカラムfollowを二次キーとして検索をかける
-      
-      
+
+
         #フォローされている情報を表示
         has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'follow_id'
         #この記述は、reverse_of_relationshipsという架空のモデルにアクセスする際はRelationshipを踏み台にし、それをfollow_idをキーにして検索という意味
         has_many :followers, through: :reverse_of_relationships, source: :user
         #follow_idをキーとし、reverse_of_relationshipsからuser_idに紐づいたものを引っ張ってくる。
-      
+
         #source = ～を参照してという意味。データのソース元。検索の出口
         #foreigin_key = ～というキーを使って検索という意味。キーで指定された情報をソースから引っ張ってくる。検索の入り口
         #through = ～を経由してという意味
-      
 
-      
+
+
         def follow(other_user)
           unless self == other_user #self(自分)はother_user(指定したユーザー)ですか？
           #自分でなければ下記の処理を実行
@@ -46,44 +51,31 @@ class User < ApplicationRecord
             #find_or_create_byとは・・・同じ組み合わせが無いか探し、なければ作成(.new .)
           end
         end
-      
+
         def unfollow(other_user) #followがあった場合
           relationship = self.relationships.find_by(follow_id: other_user.id)
           #relationshipの中身はself(user).relationshipsでfolllow_idをother_userで探す。
           relationship.destroy if relationship #relationshipがあればrelationshipを削除
         end
-      
+
         def following?(other_user) #フォローしている？
           self.followings.include?(other_user)
           #self.followings = self(user).followings(relationships.follow) つまり、ユーザーを入り口としてフォローが紐づいているものを探す
           #includeは含まれているかどうかを聞いているので、フォローしている人の中に今回のユーザーはいますか？と聞いている。
         end
-        
+
+
         #以下チャット機能
-        has_many        :relation_rooms,              dependent: :destroy
-        has_many        :room_followings,             through: :relation_room,              source: :participant
-        has_many        :reverse_of_relation_rooms,   class_name: 'Relation_room',          foreign_key: 'participant_id'
-        has_many        :room_user,                   through: :reverse_of_relation_rooms,  source: :room
-        
+        has_many        :relation_rooms,              dependent: :destroy,                  foreign_key: 'participant_id'
         has_many        :rooms,                       dependent: :destroy
+        has_many        :joind_rooms,                 through: :relation_rooms,              source: :room
+
+
+
+
         
-        
-        
-        def release(room, other_user) #followがあった場合
-          relation_room = room.relation_room.find_by(participant_id: other_user.id)
-          relation_room.destroy if relation_room #relation_roomがあれrelation_roomを削除
-        end
-        
-        def room_following?(room, other_user) #フォローしている？
-          user.room_followings.include?(room)
-          #self.followings = self(user).followings(relationships.follow) つまり、ユーザーを入り口としてフォローが紐づいているものを探す
-          #includeは含まれているかどうかを聞いているので、フォローしている人の中に今回のユーザーはいますか？と聞いている。
-        end
-        
-        def room_user_check(room, user)
-          room.relation_rooms.find_by(participant_id: user.id, room_id: room.id)
-        end
-          
-          
-          
+
+
+
+
 end

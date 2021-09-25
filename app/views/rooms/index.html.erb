@@ -5,57 +5,57 @@
     <div class = "col-5">
       <h2>グループ新規作成！</h2>
       <div class = "form-group mt-3">
-        
+
         <%= form_with model:@room, url:rooms_path, local:true do |f| %>
-          
+
         <div class = "form-group">
           <i>
             <%= f.label :グループ名 %>
           </i>
           <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control" %>
         </div>
-        
+
         <div class="actions">
           <%= f.submit "作成！", class: "button" %>
         </div>
-        
+
         <% end %>
-        
+
       </div>
-      
+
     </div>
-    
+
     <div class = "col-7">
       <table class = "table">
-        
+
         <thead>
           <tr>
-            
+
             <th>グループ名</th>
             <th>グループリーダー</th>
             <th colspan="3">参加人数</th>
-            
+
           </tr>
         </thead>
-        
+
         <tbody>
           <% @rooms.each do |room| %>
-            <% if room.relation_rooms.find_by(participant_id: current_user.id) %>
+            <% if room.joind_by?(current_user) %>
             <tr>
               <td>
                 <strong><%= link_to room.name, room_path(room) %></strong>
               </td>
-              
+
               <td><%= room.user.name %></td>
-              
+
               <td>
                 <%= room.relation_rooms.count %>人
               </td>
-              
+
             <% end %>
           <% end %>
         </tbody>
-        
+
       </table>
     </div>
   </div>

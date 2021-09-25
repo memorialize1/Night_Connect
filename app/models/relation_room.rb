@@ -7,4 +7,6 @@ class RelationRoom < ApplicationRecord
   validates :room_id,         presence: true
   validates :participant_id,  presence: true
   
+  
+  
 end

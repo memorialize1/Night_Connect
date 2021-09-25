@@ -5,64 +5,64 @@
       <h2 class = "text-center"><%= @room.name %></h2>
       <div class = "table">
         <%= form_with model:@room, url:room_path(@room), method: :patch, local:true do |f| %>
-        
+
           <div class="form-group">
             <%= f.label :name %>
             <%= f.text_field :name, class: "form-control name" %>
           </div>
-          
+
           <div class = "actions">
             <%= f.submit "名前を変える", class: 'btn btn-primary' %>
           </div>
-        
+
         <% end %>
       </div>
-      
-      
+
+
       <% if @room.user_id == current_user.id %>
         <table class = "table">
           <h1 class = "mt-5">
             👤メンバー<%= @room.relation_rooms.count %>人
           </h1>
-          
+
           <% @room.relation_rooms.each do |menber| %>
             <tr>
-            
+
               <td>
                 <%= link_to user_path(menber.participant) do %>
                   <%= attachment_image_tag(menber.participant, :image, :fill, 100, 100, fallback: "no_image.jpg") %>
                 <% end %>
               </td>
-              
+
               <td><%= menber.participant.name %></td>
-              
+
               <td>
                 <%= link_to "脱退", menber_update_path(menber), method: :put, class: "btn btn-danger" %>
               </td>
-            
+
             </tr>
           <% end %>
-  
+
         </table>
-        
+
       <% else %>
         <table class = "table">
           <h1 class = "mt-5">
             👤メンバー<%= @room.relation_rooms.count %>人
           </h1>
-          
+
           <% @room.relation_rooms.each do |menber| %>
             <tr>
-            
+
               <td>
                 <%= link_to user_path(menber.participant) do %>
                   <%= attachment_image_tag(menber.participant, :image, :fill, 100, 100, fallback: "no_image.jpg") %>
                 <% end %>
               </td>
-              
+
               <td><%= menber.participant.name %></td>
-              
-              <% if menber.participant_id == current_user.id %>
+
+              <% if current_user.check_user(menber.participant) %>
                 <td>
                   <%= link_to "脱退", menber_update_path(menber), method: :put, class: "btn btn-danger" %>
                 </td>
@@ -71,21 +71,21 @@
               <% end %>
             </tr>
           <% end %>
-  
+
         </table>
-      <% end %> 
-      
+      <% end %>
+
         <%= link_to "メンバー追加！", edit_room_path(@room), class: "button text-align:right mt-5" %>
-      
-      
+
+
       <div class = "mode">
-        
+
           <%= link_to "戻る", room_path(@room), class: 'btn btn-secondary mt-5' %>
-        
+
           <% if @room.user_id == current_user.id %>
             <%= link_to "解散", room_path(@room), method: :delete, class: "btn btn-danger mt-2" %>
           <% end %>
-        
+
       </div>
     </div>
   </div>
