@@ -9,6 +9,7 @@ class User < ApplicationRecord
          has_many :boards,            dependent: :destroy
          has_many :board_comments,    dependent: :destroy
          has_many :genres
+         has_many :tags,              dependent: :destroy
 
 
 
@@ -73,7 +74,7 @@ class User < ApplicationRecord
 
 
 
-        
+
 
 
 

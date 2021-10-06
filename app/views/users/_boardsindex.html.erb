@@ -4,7 +4,12 @@
 
   <h2>ユーザー情報</h2>
 
-  <tr><%= attachment_image_tag(user, :image, :fill, 300, 300, fallback: "no_image.jpg") %></tr>
+  <tr>
+    <%= attachment_image_tag(user, :image, :fill, 300, 300, fallback: "no_image.jpg") %>
+    <% user.tags.each do |tag| %>
+      <span class="label"><%= tag.name %></span>
+    <% end %>
+  </tr>
   <tr>
 	  <th>ニックネーム</th>
 	  <th><%= user.name %></th>
