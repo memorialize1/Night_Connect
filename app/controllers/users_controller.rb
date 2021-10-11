@@ -32,9 +32,17 @@ class UsersController < ApplicationController
                 end
                 
                 input_tags.each do |tag|
+                  # sudocode
+                  #if Tag.all.map(&:name).include?(tag.name)
+                  #  tag = Tag.find_by(name: tag.name)
+                  #  @user.tags << tag
+                  #else
+                  #  @user.tags << Tag.new(name: tag)
+                  #end
+                  
                   @user.tags.create(name: tag)
                 end
-
+                # @user.tags.save
             end
         redirect_to user_path(current_user.id), notice: "You have updated user successfully."
         else

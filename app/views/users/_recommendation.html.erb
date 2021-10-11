@@ -12,7 +12,8 @@
   </thead>
   <tbody>
     <% users.each do |user| %>
-    <% unless user.user_status == false %>
+    <% unless user.user_status == false || current_user == user %>
+      <% if current_user.has_same_tag_name?(user) %>
         <tr>
           <td><%= attachment_image_tag(user, :image, :fill, 50, 50, fallback: "no_image.jpg") %></td>
           <td><%= user.name %></td>
@@ -29,9 +30,11 @@
                 <% end %>
               <% end %>
             <% end %>
-            <% end %>
+
           </td>
         </tr>
+      <% end %>
+    <% end %>
     <% end %>
   </tbody>
 </table>

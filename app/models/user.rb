@@ -65,6 +65,12 @@ class User < ApplicationRecord
           #includeは含まれているかどうかを聞いているので、フォローしている人の中に今回のユーザーはいますか？と聞いている。
         end
 
+        # ユーザーが同じタグをもっているかどうか
+      　# TODO ユーザーとタグを多対多にしたら名前の比較ではなく、IDの比較に切り替える。
+
+        def has_same_tag_name?(user)
+          (self.tags.map(&:name) & user.tags.map(&:name)).present?
+        end
 
         #以下チャット機能
         has_many        :relation_rooms,              dependent: :destroy,                  foreign_key: 'participant_id'
