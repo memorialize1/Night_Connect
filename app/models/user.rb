@@ -66,7 +66,7 @@ class User < ApplicationRecord
         end
 
         # ユーザーが同じタグをもっているかどうか
-      　# TODO ユーザーとタグを多対多にしたら名前の比較ではなく、IDの比較に切り替える。
+        # ユーザーとタグを多対多にしたら名前の比較ではなく、IDの比較に切り替える。
 
         def has_same_tag_name?(user)
           (self.tags.map(&:name) & user.tags.map(&:name)).present?

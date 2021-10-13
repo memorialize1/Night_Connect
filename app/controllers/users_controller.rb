@@ -23,14 +23,11 @@ class UsersController < ApplicationController
     def update
         @user = User.find(params[:id])
         if @user.update(user_params)
-            
             if current_user.image.present?
-
                 input_tags = Vision.get_image_data(@user.image)
                 @user.tags.each do |tag|
                     tag.destroy
                 end
-                
                 input_tags.each do |tag|
                   # sudocode
                   #if Tag.all.map(&:name).include?(tag.name)
@@ -39,7 +36,6 @@ class UsersController < ApplicationController
                   #else
                   #  @user.tags << Tag.new(name: tag)
                   #end
-                  
                   @user.tags.create(name: tag)
                 end
                 # @user.tags.save
