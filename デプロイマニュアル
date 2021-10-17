@@ -1,0 +1,7 @@
+1) rails を kill (停止)させる kill $(cat tmp/pids/puma.pid)
+2) git pull
+3) 下記を実行する
+bundle install --path vendor/bundle --without test development
+bundle exec rails assets:precompile RAILS_ENV=production
+bundle exec rails db:migrate RAILS_ENV=production
+4) rails s -e production
