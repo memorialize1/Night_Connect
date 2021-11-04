@@ -2,6 +2,7 @@ require 'base64'
 require 'json'
 require 'net/https'
 
+
 module Vision
   class << self
     def get_image_data(image_file)
