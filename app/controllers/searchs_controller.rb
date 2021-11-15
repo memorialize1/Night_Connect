@@ -11,6 +11,7 @@ class SearchsController < ApplicationController
 
   end
 
+
   private
 
   def search_for(content, method)

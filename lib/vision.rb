@@ -26,6 +26,7 @@ module Vision
         }]
       }.to_json
 
+
       # Google Cloud Vision APIにリクエスト
       uri = URI.parse(api_url)
       https = Net::HTTP.new(uri.host, uri.port)
